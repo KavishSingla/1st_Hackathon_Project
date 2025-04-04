@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-DQvkBjpPgn7RC31MCQoOeC9TI2kdqa4+BSgNMNj8v77fdC77Kj5zpWFTJaaAoMbC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalScan - AI-Powered Legal Document Analyzer</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+            /* transform: translateY(-4px); */
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary), #34495e);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Dashboard Section */
+        .dashboard {
+            padding: 3rem 0;
+            background-color: #f5f7fa;
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 0.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--secondary);
+        }
+
+        .sidebar-menu a i {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .main-content h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* File Upload Area */
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            transition: border-color 0.3s;
+        }
+
+        .upload-area.highlight {
+            border-color: var(--secondary);
+        }
+
+        .upload-area p {
+            margin-bottom: 1rem;
+            color: #777;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .upload-progress {
+            width: 100%;
+            height: 8px;
+            background-color: #eee;
+            border-radius: 4px;
+            margin-top: 1rem;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        /* Analysis Results */
+        .analysis-results {
+            display: none;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .tab.active {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Summary Tab */
+        .document-summary {
+            margin-bottom: 2rem;
+        }
+
+        .document-summary h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .summary-box {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Key Clauses Tab */
+        .clause-list {
+            list-style: none;
+        }
+
+        .clause-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .clause-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .clause-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .clause-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .clause-meta {
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .clause-content {
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .clause-content.active {
+            display: block;
+        }
+
+        .clause-item.risk-high {
+            border-left: 4px solid var(--danger);
+        }
+
+        .clause-item.risk-medium {
+            border-left: 4px solid var(--warning);
+        }
+
+        .clause-item.risk-low {
+            border-left: 4px solid var(--success);
+        }
+
+        .risk-tag {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: white;
+        }
+
+        .risk-high {
+            background-color: var(--danger);
+        }
+
+        .risk-medium {
+            background-color: var(--warning);
+        }
+
+        .risk-low {
+            background-color: var(--success);
+        }
+
+        /* Search and Filter */
+        .search-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .filter-dropdown {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            min-width: 150px;
+        }
+
+        /* Entities Tab */
+        .entity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .entity-card {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .entity-type {
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+        }
+
+        .entity-value {
+            font-weight: 500;
+        }
+
+        /* Fraud Detection Tab */
+        .alert-box {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .alert-box.alert-danger {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--danger);
+            color: var(--danger);
+        }
+
+        .alert-box.alert-warning {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left: 4px solid var(--warning);
+            color: var(--warning);
+        }
+
+        .alert-box h4 {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .alert-box h4 i {
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .form-check input {
+            margin-right: 0.5rem;
+        }
+
+        
+        .language-selector {
+            position: relative;
+        }
+
+        .language-selector select {
+            /* padding: 0.5rem; */
+            border:  rgba(255, 255, 255, 0.3);
+            background-color: #2D3F52;
+
+            color: white;
+            /* border-radius: 4px; */
+            appearance: none;
+            padding-right: 1.5rem;
+            cursor: pointer;
+        }
+
+        #languageSelect option {
+            color: black;
+        }
+
+        .language-selector::after {
+            content: "▼";
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 0.8rem;
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                font-size: 1.5rem;
+                color: white;
+            }
+            
+            .mobile-menu {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 250px;
+                height: 100%;
+                background-color: var(--primary);
+                z-index: 200;
+                padding: 2rem;
+                transition: right 0.3s;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .mobile-menu.active {
+                right: 0;
+            }
+            
+            .close-menu {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: white;
+                cursor: pointer;
+            }
+            
+            .mobile-nav {
+                margin-top: 3rem;
+            }
+            
+            .mobile-nav a {
+                display: block;
+                padding: 1rem 0;
+                color: white;
+                text-decoration: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            /* .logout-msg{
+                position: absolute;
+                margin-top: 20px;
+                margin-left: 600px;
+            } */
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-balance-scale"></i>
+                    LexShield
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <!-- <li><a href="#pricing">Pricing</a></li> -->
+                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <div class="language-selector" style="border: none;">
+                            <select id="languageSelect">
+                                <option value="en">English</option>
+                                <option value="es">Español</option>
+                                <option value="fr">Français</option>
+                                <option value="de">Deutsch</option>
+                                <option value="zh">中文</option>
+                            </select>
+                        </div>
+                    </li>
+                    <!-- <li><button class="btn btn-outline" id="loginBtn">Login</button></li>
+                    <li><button class="btn btn-primary" id="signupBtn">Sign Up</button></li> -->
+                    {% if current_user.is_authenticated %}
+                    <a href="{{url_for('profile')}}" class="btn" style="margin-top: -5px;">  <i class="fa-solid fa-user icon"></i>  Profile</a>
+                    <a href="{{url_for('logout')}}" class="btn"style="margin-top: -4px; " onclick="return confirm('Are you sure, you want to logout ?')"> <i class="fa-solid fa-sign-out-alt icon"></i> Logout</a>
+
+                    {% else %}
+                    <a href="{{url_for('register')}}" class="btn" style="margin-top: -5px;" > <i class="fa-solid fa-user-plus icon"></i> Sign up</a>
+                    <a href="{{url_for('login')}}" class="btn" style="margin-top: -4px;">  <i class="fa-solid fa-sign-in-alt icon"></i>  Sign In</a>
+                </ul>
+                {% endif %}
+                <!-- <div class="hamburger" id="hamburgerBtn">
+                    <i class="fas fa-bars"></i>
+                </div> -->
+            </nav>
+        </div>
+    </header>
+
+    <div class="logout-msg" style="position: absolute; margin-top: 15px;margin-left: 650px;">
+        
+
+        {% for category,messages in get_flashed_messages(with_categories=True) %}
+    
+        <div id="alertBox" class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+            {{messages}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    
+        {% endfor %}
+
+
+    </div>
+
+   
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>AI-Powered Legal Document Analysis</h1>
+            <p>Streamline your legal document review process with our advanced AI technology. Detect fraud, analyze contracts, and extract key information in seconds.</p>
+            <button class="btn btn-primary">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>Our advanced NLP algorithms analyze legal documents to extract key information, highlight important clauses, and identify potential risks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Fraud Detection</h3>
+                    <p>Detect potentially fraudulent clauses and inconsistencies with our anomaly detection system that flags suspicious language and terms.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Entity Recognition</h3>
+                    <p>Automatically identify and extract key entities such as names, dates, financial terms, and obligations from your legal documents.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Multi-Language Support</h3>
+                    <p>Analyze contracts in multiple languages including English, Spanish, French, German, and Chinese with our multilingual NLP models.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Secure Encryption</h3>
+                    <p>Your documents are protected with enterprise-grade encryption to ensure confidentiality and compliance with legal standards.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3>Blockchain Verification</h3>
+                    <p>Optional blockchain integration for document authentication and verification to ensure contract integrity and prevent tampering.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <h2 class="section-title">Document Analysis Dashboard</h2>
+            <div class="dashboard-content">
+                <div class="sidebar">
+                    <h3>Navigation</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="#" class="active"><i class="fas fa-upload"></i> Upload Document</a></li>
+                        <li><a href="#"><i class="fas fa-history"></i> Document History</a></li>
+                        <li><a href="#"><i class="fas fa-folder"></i> My Documents</a></li>
+                        <li><a href="#"><i class="fas fa-bell"></i> Alerts</a></li>
+                        <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                    </ul>
+                    <h3 style="margin-top: 1.5rem;">Recent Documents</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Employment Contract.pdf</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> NDA Agreement.docx</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Lease Agreement.pdf</a></li>
+                    </ul>
+                </div>
+                <div class="main-content">
+                    <h2>Upload Legal Document</h2>
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                        <p>Drag and drop your document here, or click to browse</p>
+                        <button class="btn btn-primary" id="browseBtn">Browse Files</button>
+                        <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.txt">
+                        <div class="upload-progress" id="uploadProgress">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="analysis-results" id="analysisResults">
+                        <div class="tabs">
+                            <div class="tab active" data-tab="summary">Summary</div>
+                            <div class="tab" data-tab="clauses">Key Clauses</div>
+                            <div class="tab" data-tab="entities">Entities</div>
+                            <div class="tab" data-tab="fraud">Fraud Detection</div>
+                        </div>
+
+                        <!-- Summary Tab -->
+                        <div class="tab-content active" id="summary">
+                            <div class="document-summary">
+                                <h3>Document Overview</h3>
+                                <div class="summary-box">
+                                    <p>This employment agreement, dated January 15, 2025, establishes the terms between Acme Corporation and John Doe for the position of Senior Software Engineer. The contract includes standard confidentiality provisions, non-compete clauses, and compensation details. Several potentially concerning clauses have been flagged for review, particularly regarding termination conditions and intellectual property rights.</p>
+                                </div>
+                            </div>
+                            <div class="document-meta">
+                                <h3>Document Information</h3>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                    <div class="entity-card">
+                                        <div class="entity-type">Document Type</div>
+                                        <div class="entity-value">Employment Contract</div>
+                                    </div>
+                                    <div class="entity-card">
+                                        <div class="entity-type">Document Date</div>
+                                        <div class="entity-value">January 15, 2025</div>
+                                    </div>
+                                    <div class="entity-card">
+                                        <div class="entity-type">Language</div>
+                                        <div class="entity-value">English</div>
+                                    </div>
+                                    <div class="entity-card">
+                                        <div class="entity-type">Pages</div>
+                                        <div class="entity-value">12</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Key Clauses Tab -->
+                        <div class="tab-content" id="clauses">
+                            <div class="search-container">
+                                <input type="text" class="search-input" placeholder="Search clauses...">
+                                <select class="filter-dropdown">
+                                    <option value="all">All Clauses</option>
+                                    <option value="high">High Risk</option>
+                                    <option value="medium">Medium Risk</option>
+                                    <option value="low">Low Risk</option>
+                                </select>
+                            </div>
+                            <ul class="clause-list">
+                                <li class="clause-item risk-high">
+                                    <div class="clause-header">
+                                        <div class="clause-title">Section 8.2: Termination Conditions</div>
+                                        <div class="clause-meta">
+                                            <span class="risk-tag risk-high">High Risk</span>
+                                        </div>
+                                    </div>
+                                    <div class="clause-content">
+                                        <p>The Company reserves the right to terminate this agreement at any time for any reason without notice and without severance compensation. Upon termination, all employee benefits will cease immediately, and the Employee waives all rights to contest the termination through any legal means.</p>
+                                        <p class="risk-analysis" style="margin-top: 10px; font-style: italic; color: #e74c3c;">
+                                            <strong>Risk Analysis:</strong> This clause may be unenforceable and potentially illegal as it contradicts standard employment laws in most jurisdictions which require notice periods and/or severance pay. The waiver of legal rights is particularly concerning.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="clause-item risk-medium">
+                                    <div class="clause-header">
+                                        <div class="clause-title">Section 5.1: Intellectual Property Rights</div>
+                                        <div class="clause-meta">
+                                            <span class="risk-tag risk-medium">Medium Risk</span>
+                                        </div>
+                                    </div>
+                                    <div class="clause-content">
+                                        <p>All intellectual property created by the Employee during and after the employment period, regardless of whether it was created during working hours or using personal resources, shall be the exclusive property of the Company in perpetuity.</p>
+                                        <p class="risk-analysis" style="margin-top: 10px; font-style: italic; color: #f39c12;">
+                                            <strong>Risk Analysis:</strong> The scope of this clause is unusually broad and may be unenforceable as written. The claim to IP created "after the employment period" and using "personal resources" likely extends beyond reasonable bounds.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="clause-item risk-low">
+                                    <div class="clause-header">
+                                        <div class="clause-title">Section 3.4: Compensation</div>
+                                        <div class="clause-meta">
+                                            <span class="risk-tag risk-low">Low Risk</span>
+                                        </div>
+                                    </div>
+                                    <div class="clause-content">
+
+
+                                        <script>
+        
+                                            setTimeout(function () {
+                                                let alertBox = document.getElementById("alertBox");
+                                                if (alertBox) {
+                                                    alertBox.classList.remove("show");
+                                                    alertBox.classList.add("fade");
+                                                    setTimeout(() => alertBox.remove(), 500); 
+                                                }
+                                            }, 2000);
+                                        </script>
+                                
+
+                                    </body>  
+                                    </html>
+                                      
+                                        
+                                
