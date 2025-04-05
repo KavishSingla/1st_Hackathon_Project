@@ -1,0 +1,34 @@
+<!-- templates/fraud_results.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fraud Detection Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .clause {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .fraud {
+            color: red;
+            background-color: #ffe5e5;
+            font-weight: bold;
+        }
+        .normal {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fraud Detection Results</h1>
+    {% for item in results %}
+        <div class="clause {% if item.is_fraud %}fraud{% else %}normal{% endif %}">
+            {{ item.text }}
+        </div>
+    {% endfor %}
+</body>
+</html>

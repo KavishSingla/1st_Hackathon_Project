@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .fraud-highlight {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            padding: 2px 0;
+            border-bottom: 2px solid #dc3545;
+        }
+        
+        .document-content {
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header bg-danger text-white">
+                        <h4 class="mb-0">
+                            <i class="fas fa-search-dollar me-2"></i>Fraud Detection Results - {{ pdf.filename }}
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert {% if clause_count > 0 %}alert-danger{% else %}alert-success{% endif %} mb-4">
+                            <h5 class="alert-heading">
+                                {% if clause_count > 0 %}
+                                    <i class="fas fa-exclamation-triangle me-2"></i>Potential Issues Detected!
+                                {% else %}
+                                    <i class="fas fa-check-circle me-2"></i>No Suspicious Clauses Found
+                                {% endif %}
+                            </h5>
+                            <p>
+                                {% if clause_count > 0 %}
+                                    We've identified {{ clause_count }} potentially problematic clause{% if clause_count != 1 %}s{% endif %} in this document that may require further review.
+                                {% else %}
+                                    Our analysis didn't detect any suspicious clauses in this document. However, always review legal documents carefully.
+                                {% endif %}
+                            </p>
+                        </div>
+    
+                        {% if clause_count > 0 %}
+                        <div class="mb-4">
+                            <h5>Flagged Clauses:</h5>
+                            <div class="list-group">
+                                {% for clause in flagged_clauses %}
+                                <div class="list-group-item list-group-item-danger">
+                                    <p class="mb-1">{{ clause }}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+    
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">Document with Highlighted Issues</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="document-content" style="max-height: 500px; overflow-y: auto;">
+                                    {% if pdf.marked_content %}
+                                        {{ pdf.marked_content|safe }}
+                                    {% else %}
+                                        {{ pdf.text_content }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('view_pdf', pdf_id=pdf.id) }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to PDF View
+                            </a>
+                            <a href="{{ url_for('my_pdfs') }}" class="btn btn-primary">
+                                <i class="fas fa-file-pdf me-2"></i>My PDFs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    
+</body>
+</html>

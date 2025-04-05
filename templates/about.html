@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+
+    <style>
+
+.navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 15px 30px;
+background-color: white;
+box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+margin-left: 10px;
+}
+
+nav ul {
+list-style: none;
+display: flex;
+gap: 20px;
+}
+
+nav ul li a {
+text-decoration: none;
+color: #333;
+font-size: 16px;
+}
+
+
+
+.btn-outline {
+background: transparent;
+border: 2px solid #333;
+color: #333;
+}
+
+
+.sign{
+margin-right: 50px;
+}
+
+.title{
+margin-top: 10px;
+}
+
+
+        body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container-column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .image-container {
+            position: relative;
+            margin-top: 5vh;
+            width: 100vw;
+            height: 80vh;
+        }
+
+        .back_img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .image-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(59, 6, 138, 0.5), rgba(18, 43, 92, 0.5));
+        }
+
+        .over-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 5rem;
+            font-family: sans-serif;
+            font-weight: bold;
+            text-align: center;
+            z-index: 10;
+            width: 80%;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            flex-direction: column;
+            /* max-width: 650px; */
+            background-color: #F5F5F5;
+            box-sizing: border-box;
+            height: 250px;
+        }
+
+        .box1 {
+            max-width: 650px;
+            padding: 0 300px;
+        }
+
+        .box {
+            width: 120px;
+            text-align: center;
+        }
+
+        .box img {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 10px;
+        }
+
+        .container2 {
+            display: flex;
+            gap: 100px;
+            justify-content: center;
+            /* align-items: center; */
+            align-content: center;
+            /* max-width: 1000px; */
+            /* margin-left: 300px; */
+            width: 800px;
+            flex-wrap: wrap;
+        }
+
+        .box span {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .about-box {
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            flex-direction: column;
+            background-color: rgb(80, 120, 143);
+            box-sizing: border-box;
+        }
+
+        .about-img {
+            margin-top: -600px;
+            margin-left: 800px;
+            margin-bottom: 100px;
+        }
+
+        .team-section {
+            text-align: center;
+            padding: 50px;
+            background-color: #f8f9fa;
+        }
+
+        .team-heading {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            position: relative;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 6px 15px rgba(152, 62, 35, 0.15);
+        }
+
+        .team-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            display: block;
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .team-role {
+            color: #777;
+            font-size: 1rem;
+        }
+
+        .team-card:hover .team-role {
+            color: #333;
+            font-weight: bold;
+        }
+
+
+
+        .footer {
+            background: linear-gradient(to right, #1E1E95, #5C2E94);
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .footer-column {
+            flex: 1;
+            margin: 10px;
+            min-width: 200px;
+        }
+        .footer-column h3 {
+            margin-bottom: 10px;
+        }
+        .footer-column a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin: 5px 0;
+        }
+        .footer-column input {
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            width: 80%;
+        }
+        .footer-column .social-icons {
+            margin-top: 10px;
+        }
+        .footer-column .social-icons a {
+            display: inline-block;
+            margin-right: 10px;
+            color: white;
+            font-size: 18px;
+        }
+        .footer-bottom {
+            text-align: center;
+            background: #302e5a;
+            color: white;
+            padding: 10px 0;
+        }
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-home" style="text-align: right; margin-left: 90vw; margin-top: 2vh; position: absolute;"> 
+    
+        <a href="{{url_for('home')}}" style="text-decoration: none; color: black;"><i class="fa fa-home"></i>  Home</a>
+        </div>
+
+
+
+    
+    <div class="container">
+        <div class="image-container">
+            <img src="documentlex.jpg" alt="background" class="back_img">
+            <h2 class="over-text">"Analyze,Detect,Protect-The Future Of Legal Tech"</h2>
+        </div>
+    </div>
+
+    <div class="container1">
+        <br>
+        <div class="box1">
+            <h2><b>LexShield isn’t just a tool — it’s a shield that empowers you to navigate legal complexities with confidence and clarity..</h2></b>
+
+            <p>At LexShield, we believe that the future of legal technology lies in intelligent automation, precision, and trust. Our platform is designed to analyze complex legal contracts using advanced AI, detect inconsistencies or potentially fraudulent clauses, and ultimately protect users from hidden risks and legal pitfalls..</p>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="about-box">
+        <div class="box1">
+            <h1>About LexShield</h1>
+          <b>LexShield </b>was founded with a vision to revolutionize the way legal documents are analyzed and understood. Recognizing the growing complexity and volume of contracts in both corporate and legal sectors, we set out to build a powerful AI-driven platform that simplifies legal workflows. Over time, LexShield has evolved into a robust solution that leverages Natural Language Processing (NLP), anomaly detection, and advanced entity recognition to extract key information, summarize clauses, and detect potential fraud in contracts—securely and at scale.
+            <h2>Why LexShield</h2>
+            In today’s fast-paced legal and business environments, traditional contract analysis is not only time-consuming but also vulnerable to human oversight. LexShield bridges this gap by combining advanced AI with legal intelligence to deliver instant, reliable, and secure contract analysis.With features like: <br>
+            <ul>
+            <li>
+            Automated clause summarization <br></li>
+            
+           <li>Fraudulent clause detection through anomaly analysis <br></li>
+            
+            <li> Key entity extraction using NER <br></li>
+            
+            <li> Multilingual document support <br></li>
+            
+           <li> Secure user access with encryption & optional blockchain verification <br></li>
+            </ul>
+            LexShield ensures that you never miss a critical detail. Whether you're a law firm, corporate legal department, or an independent professional, LexShield enhances your workflow by reducing manual effort, mitigating legal risks, and ensuring compliance — all in a streamlined, easy-to-use platform. <br>
+            <b>Because in law, clarity isn’t just important — it's everything.</b>
+
+            <h2>Smart, Simple & Secure</h2>
+            LexShield is built on the principle that legal technology should be both powerfully secure and effortlessly simple to use. All documents uploaded to our platform are protected using bank-level encryption, ensuring your confidential contracts stay safe from unauthorized access.
+
+            At the same time, LexShield’s clean and intuitive interface makes it easy for users — regardless of legal or technical background — to navigate, upload documents, and receive insights within minutes. No complex setup, no steep learning curve — just secure, smart, and seamless contract analysis
+
+
+            <img src="document2lexshield.jpg" style="width: 300px; height: 330px;"
+                class="about-img" alt="">
+        </div>
+    </div>
+
+
+    <div class="team-section">
+        <h2 class="team-heading">Meet Our Team</h2>
+        <br>
+        <div class="team-container">
+            <div class="team-card">
+                <img src="devansh.jpg" alt="Team Member" class="team-img">
+                <p class="team-name">Devansh Kapoor</p>
+            </div>
+
+            <div class="team-card">
+                <img src="kavish2.jpg" alt="Team member" class="team-img">
+                <p class="team-name">Kavish Singla</p>
+            </div>
+
+            <div class="team-card">
+                <img src="ishani.jpg" alt="Team Member" class="team-img">
+                <p class="team-name">Ishani Garg</p>
+            </div>
+
+            <div class="team-card">
+                <img src="kartik.jpg" alt="Team Member" class="team-img">
+                <p class="team-name">Kartikey Yadav</p>
+            </div>
+            <div class="team-card">
+                <img src="anuuuuuu.jpg" alt="Team Member" class="team-img">
+                <p class="team-name">Anupriya</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <footer>
+        <div class="footer">
+            <div class="footer-column">
+                <h3>LexShield</h3>
+                <p>Subscribe to Easy Tutorials YouTube channel to watch more videos on website development and get notifications of the latest videos.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Office</h3>
+                <p>Chitkara University<br>Rajpura, near Jhansla<br>Punjab, PIN 140401, India</p>
+                <p>Email: lexshield@gmail.com</p>
+                <p>Phone: +91 - 0123456789</p>
+            </div>
+            <div class="footer-column">
+                <h3>Links</h3>
+                <a href="#">Home</a>
+                <a href="#">Services</a>
+                <a href="#">About Us</a>
+                <a href="#">Contacts</a>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <input type="email" placeholder="Enter your email id">
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram icon"></i></a>
+                    <a href="#"> <i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Lex Shield © 2025 - All Rights Reserved
+        </div>
+    </footer>
+
+  
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
