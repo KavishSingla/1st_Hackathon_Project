@@ -401,6 +401,11 @@ def home():
     return render_template("index.html")
 
 
+@app.route('/translator')
+# @login_required
+def translator():
+    return render_template('translate.html')
+
 
 @app.route("/profile")
 @login_required
@@ -409,10 +414,19 @@ def profile():
 
 
 
-@app.route("/contactinfo" , methods=["POST"])
-def contact_info():
-    flash("Thanks for your feedback", "success")
-    return redirect(url_for("home"))
+@app.route("/contact")
+def contact():
+    # flash("Thanks for your feedback", "success")
+    return render_template('contact.html')
+
+@app.route("/about")
+def about():
+    # flash("Thanks for your feedback", "success")
+    return render_template('about.html')
+
+@app.route("/chatbot")
+def chatbot():
+    return render_template('chatbot.html')
 
 
 @app.route("/apply")

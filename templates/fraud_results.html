@@ -1,4 +1,4 @@
-<!-- templates/fraud_results.html -->
+<!-- templates/fraud_results.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,5 +30,95 @@
             {{ item.text }}
         </div>
     {% endfor %}
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fraud Detection Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .clause {
+            padding: 18px;
+            margin-bottom: 16px;
+            border-radius: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .clause:hover {
+            transform: scale(1.02);
+        }
+
+        .fraud {
+            background-color: #ffe6e6;
+            border-left: 6px solid #e74c3c;
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .normal {
+            background-color: #e8f5e9;
+            border-left: 6px solid #2ecc71;
+            color: #2d6a4f;
+        }
+
+        .label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .label.fraud {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .label.normal {
+            background-color: #2ecc71;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📄 Fraud Detection Results</h1>
+        {% for item in results %}
+            <div class="clause {% if item.is_fraud %}fraud{% else %}normal{% endif %}">
+                <span class="label {% if item.is_fraud %}fraud{% else %}normal{% endif %}">
+                    {% if item.is_fraud %}⚠️ Fraudulent Clause{% else %}✅ Normal Clause{% endif %}
+                </span><br>
+                {{ item.text }}
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

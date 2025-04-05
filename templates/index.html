@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LegalScan - AI-Powered Legal Document Analyzer</title>
     <style>
+        .goog-te-banner-frame.skiptranslate {
+        display: none !important;
+        }
+
         :root {
             --primary: #2c3e50;
             --secondary: #3498db;
@@ -28,6 +32,7 @@
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
+            top: 0px;
         }
 
         .container {
@@ -716,16 +721,20 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#dashboard">Dashboard</a></li>
                     <!-- <li><a href="#pricing">Pricing</a></li> -->
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="{{url_for('contact')}}">Contact</a></li>
+                    <li><a href="{{url_for('about')}}">About</a></li>
                     <li>
-                        <div class="language-selector" style="border: none;">
+                        <!-- <div class="language-selector" style="border: none;">
                             <select id="languageSelect">
                                 <option value="en">English</option>
                                 <option value="es">Español</option>
                                 <option value="fr">Français</option>
                                 
                             </select>
-                        </div>
+                        </div> -->
+
+                        <div id="google_translate_element" style=" top: 10px; right: 20px; z-index: 9999;"></div>
+
                     </li>
                     <!-- <li><button class="btn btn-outline" id="loginBtn">Login</button></li>
                     <li><button class="btn btn-primary" id="signupBtn">Sign Up</button></li> -->
@@ -766,7 +775,8 @@
         <div class="container">
             <h1>AI-Powered Legal Document Analysis</h1>
             <p>Streamline your legal document review process with our advanced AI technology. Detect fraud, analyze contracts, and extract key information in seconds.</p>
-            <button class="btn btn-primary">Get Started</button>
+            <!-- <button class="btn btn-primary">Get Started</button> -->
+             <a href="#dashboard" class="btn btn-primary" >Get Started</a>
         </div>
     </section>
 
@@ -841,9 +851,8 @@
                             </ul>
                         </li>
                         <li><a href="#"><i class="fas fa-folder"></i> My Documents</a></li>
-                        <li><a href="#"><i class="fas fa-bell"></i> Alerts</a></li>
-                        <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
-                        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="{{ url_for('translator') }}"><i class="fas fa-chart-bar"></i> Translator</a></li>
+                        <!-- <li><a href="{{ url_for('chatbot') }}"><i class="fas fa-cog"></i> Chatbot</a></li> -->
                     </ul>
                     <h3 style="margin-top: 1.5rem;">Recent Documents</h3>
                     <ul class="sidebar-menu">
@@ -873,7 +882,7 @@
 
                         <form action="/detect_fraud" method="POST"  enctype="multipart/form-data">
                             <!-- <label for="file" class="btn btn-primary" >Upload PDF:</label> -->
-                            <input style="margin-top: 20px; margin-left: 50px;" type="file" name="pdf" id="file" accept=".pdf" required>
+                            <input style="margin-top: 20px; margin-left: 35px;" type="file" name="pdf" id="file" accept=".pdf" required>
                             <button type="submit" class="btn btn-primary">Fraud Detection</button>
                         </form>
                         
@@ -972,8 +981,15 @@
                                     <div class="clause-content">
 
 
-                                        <script>
-        
+                                        <script type="text/javascript">
+                                            function googleTranslateElementInit() {
+                                                new google.translate.TranslateElement({
+                                                    pageLanguage: 'en',
+                                                    includedLanguages: 'en,es,fr,de,zh,hi,pa', // You can add more language codes if needed
+                                                    layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+                                                }, 'google_translate_element');
+                                            }
+
                                             setTimeout(function () {
                                                 let alertBox = document.getElementById("alertBox");
                                                 if (alertBox) {
@@ -982,8 +998,12 @@
                                                     setTimeout(() => alertBox.remove(), 500); 
                                                 }
                                             }, 2000);
+
                                         </script>
-                                
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+<script src="//code.tidio.co/cpehw7qxp7go64zak4fixwtj63qb2bee.js" async></script>
 
                                     </body>  
                                     </html>
