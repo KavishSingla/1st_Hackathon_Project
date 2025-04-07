@@ -8,8 +8,8 @@ Welcome to my first hackathon project!  This project was built as part of a team
 ## Tech Stack
 - **Frontend:** HTML, CSS, JavaScript (basic interface)
 - **Backend:** Python, Flask
-- **AI/ML:** Hugging Face Transformers (for summarization), Named Entity Recognition (NER)
-- **Other:** PDF parsing, SQLite, GitHub
+- **AI/ML:** PyPDF2, Named Entity Recognition (NER)
+- **Other:** PDF parsing, SQLite, GitHub , Google API's , Titio chatbot
 
 ## Features
 -  User Registration & Login
