@@ -9,7 +9,7 @@ Welcome to my first hackathon project!  This project was built as part of a team
 - **Frontend:** HTML, CSS, JavaScript (basic interface)
 - **Backend:** Python, Flask
 - **AI/ML:** PyPDF2, Named Entity Recognition (NER)
-- **Other:** PDF parsing, SQLite, GitHub , Google API's , Titio chatbot
+- **Other:** PDF parsing, SQLite, GitHub , Google API's , Tidio chatbot
 
 ## Features
 -  User Registration & Login
