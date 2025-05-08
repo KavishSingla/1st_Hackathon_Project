@@ -2,9 +2,9 @@
 <br>
 Group Details - 
 <br>
-1.Devansh Kapoor 
+1.Kavish Singla
 <br>
-2.Kavish Singla 
+2.Devansh Kapoor 
 <br>
 3.Kartikey Yadav 
 <br>

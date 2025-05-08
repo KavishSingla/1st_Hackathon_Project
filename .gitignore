@@ -1,4 +1,6 @@
 env1/
 
+__pycache__/
+
 app.db
 uploads/
