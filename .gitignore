@@ -2,5 +2,5 @@ env1/
 
 __pycache__/
 
-app.db
+app.db/
 uploads/

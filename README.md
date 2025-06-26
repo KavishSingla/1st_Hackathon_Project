@@ -1,6 +1,6 @@
 # AI-Powered Document Analyzer
 
-Welcome to my first hackathon project!  This project was built as part of a team during a hackathon. I’m currently a 2nd semester student, and this is my first experience working on a real-world problem using AI and web development.
+Welcome to my first hackathon project!  This project was built as part of a team during a hackathon when I was in 2nd semester, and this is my first experience working on a real-world problem using AI and web development.
 
 ##  Project Name
 **AI-Powered Document Analyzer with Fraud Detection**
